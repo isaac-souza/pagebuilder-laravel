@@ -2,40 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\AccountResource;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function check()
     {
-        $credentials = request(['email', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if(is_null(user()))
+        {
+            return response()->json(['authenticated' => false], Response::HTTP_OK);
         }
-
-        return response()->json($token);
+        
+        return response()->json(['authenticated' => true], Response::HTTP_OK);
     }
 
-    public function logout()
+    public function account()
     {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        return new AccountResource(account());
     }
-
-    public function refresh()
-    {
-        return response()->json([
-            'access_token' => auth()->refresh,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
-    }
-
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
 }
