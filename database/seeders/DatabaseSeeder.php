@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\LandingPage;
+use App\Models\Account;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        User::factory(1)->create([
+            'email' => 'isaacsouza17@gmail.com'
+        ]);
+
+        Account::factory(1)->for(User::first())->create();
+
+        LandingPage::factory(5)->for(Account::first())->create();
     }
 }
