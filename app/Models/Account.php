@@ -16,6 +16,10 @@ class Account extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $fillable = [
+        'slug',
+    ];
+
     public function landingPages()
     {
         return $this->hasMany(LandingPage::class);
