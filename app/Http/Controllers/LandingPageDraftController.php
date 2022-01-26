@@ -19,8 +19,7 @@ class LandingPageDraftController extends Controller
         }
 
         $landingPage->update([
-            'drafts' => ['mainPage' => $request->pages],
-            'unpublished_changes' => true,
+            'draft' => ['main' => $request->pages],
         ]);
 
         return new LandingPageResource($landingPage->refresh());

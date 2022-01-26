@@ -43,7 +43,6 @@ class LandingPageController extends Controller
         $landingPage->update([
             'pages' => ['main' => $request->pages, 'thanks' => []],
             'draft' => ['main' => $request->pages, 'thanks' => []],
-            'unpublished_changes' => false,
         ]);
 
         return new LandingPageResource($landingPage->refresh());

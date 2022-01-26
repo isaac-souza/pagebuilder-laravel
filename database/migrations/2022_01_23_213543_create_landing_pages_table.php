@@ -22,8 +22,7 @@ class CreateLandingPagesTable extends Migration
             $table->string('type');
 
             $table->json('pages')->nullable();
-            $table->json('drafts')->nullable();
-            $table->boolean('unpublished_changes');
+            $table->json('draft')->nullable();
 
             $table->timestamps();
 

@@ -13,8 +13,7 @@ class LandingPageResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'pages' => $this->pages,
-            'drafts' => $this->drafts,
-            'unpublished_changes' => $this->unpublished_changes,
+            'draft' => $this->draft,
         ];
     }
 }

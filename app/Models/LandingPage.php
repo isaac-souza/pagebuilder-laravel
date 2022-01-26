@@ -18,16 +18,12 @@ class LandingPage extends Model
 
     protected $fillable = [
         'pages',
-        'drafts',
+        'draft',
     ];
 
     protected $casts = [
         'pages' => 'array',
-        'drafts' => 'array',
-    ];
-
-    protected $attributes = [
-        'unpublished_changes' => false,
+        'draft' => 'array',
     ];
 
     public function account()
