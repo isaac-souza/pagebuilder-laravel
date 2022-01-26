@@ -41,11 +41,12 @@ class LandingPageController extends Controller
         }
 
         $landingPage->update([
-            'pages' => ['mainPage' => $request->pages],
+            'pages' => ['main' => $request->pages, 'thanks' => []],
+            'draft' => ['main' => $request->pages, 'thanks' => []],
             'unpublished_changes' => false,
         ]);
 
-        return response()->json([], Response::HTTP_OK);
+        return new LandingPageResource($landingPage->refresh());
     }
 
     public function destroy($uuid)
