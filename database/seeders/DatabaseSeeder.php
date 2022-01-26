@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(1)->create([
+            'name' => 'Isaac Souza',
             'email' => 'isaacsouza17@gmail.com'
         ]);
 
-        Account::factory(1)->for(User::first())->create();
+        Account::factory(1)->for(User::first())->create(['slug' => 'isaac-souza']);
 
         LandingPage::factory(5)->for(Account::first())->create();
     }
