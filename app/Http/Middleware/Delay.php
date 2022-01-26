@@ -21,7 +21,7 @@ class Delay
     {
         if(config('app.env') != 'production')
         {
-            sleep(1);
+            sleep(0.5);
         }
 
         return $next($request);
