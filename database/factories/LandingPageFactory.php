@@ -22,8 +22,14 @@ class LandingPageFactory extends Factory
             'slug' => Str::slug($this->faker->sentence(2)),
             'type' => 'infoproduct',
 
-            'pages' => [],
-            'draft' => [],
+            'pages' => [
+                'main' => [],
+                'thanks' => [], 
+            ],
+            'draft' => [
+                'main' => [],
+                'thanks' => [],
+            ],
         ];
     }
     
