@@ -11,11 +11,11 @@ if (! function_exists('user'))
     /**
      * Returns the current logged in user
      *  
-     * @return \App\Models\User
+     * @return \App\Models\User|null
      * */
-    function user(): User
+    function user(): User|null
     {
-        /** @var \App\Models\User $user */
+        /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
         return $user;
@@ -27,11 +27,11 @@ if (! function_exists('account'))
     /**
      * Returns the current logged in user's account
      *  
-     * @return \App\Models\Account
+     * @return \App\Models\Account|null
      * */
-    function account(): Account
+    function account(): Account|null
     {
-        /** @var \App\Models\Account $account */
+        /** @var \App\Models\Account|null $account */
         $account = auth()->user()->account;
 
         return $account;
