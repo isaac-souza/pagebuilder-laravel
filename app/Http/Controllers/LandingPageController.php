@@ -64,6 +64,6 @@ class LandingPageController extends Controller
 
         $landingPage->delete();
 
-        return LandingPageResource::collection(account()->landingPages);
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
