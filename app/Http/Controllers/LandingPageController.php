@@ -50,6 +50,20 @@ class LandingPageController extends Controller
 
     public function destroy($uuid)
     {
-        //
+        $landingPage = LandingPage::find($uuid);
+
+        if(is_null($landingPage))
+        {
+            return response()->json([], Response::HTTP_NOT_FOUND);
+        }
+
+        if($landingPage->account_uuid != account()->uuid)
+        {
+            return response()->json([], Response::HTTP_NOT_FOUND);
+        }
+
+        $landingPage->delete();
+
+        return LandingPageResource::collection(account()->landingPages);
     }
 }
