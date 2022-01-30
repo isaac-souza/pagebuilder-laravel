@@ -12,10 +12,10 @@ Route::middleware('delay')->group(function() {
 
     Route::put('landing-pages/{uuid}/draft', [LandingPageDraftController::class, 'update']);
 
-    Route::get('landing-pages',             [LandingPageController::class, 'index']);
-    Route::get('landing-pages/{uuid}',      [LandingPageController::class, 'show']);
-    Route::post('landing-pages',            [LandingPageController::class, 'store']);
-    Route::put('landing-pages/{uuid}',      [LandingPageController::class, 'update']);
-    Route::delete('landing-pages/{uuid}',   [LandingPageController::class, 'destroy']);
+    Route::get('landing-pages',             [LandingPageController::class, 'index'])->name('landing-pages.index');
+    Route::get('landing-pages/{uuid}',      [LandingPageController::class, 'show'])->name('landing-pages.show');
+    Route::post('landing-pages',            [LandingPageController::class, 'store'])->name('landing-pages.store');
+    Route::put('landing-pages/{uuid}',      [LandingPageController::class, 'update'])->name('landing-pages.update');
+    Route::delete('landing-pages/{uuid}',   [LandingPageController::class, 'destroy'])->name('landing-pages.destroy');
 
 });
