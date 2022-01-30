@@ -20,6 +20,7 @@ class CreateAccountsTable extends Migration
             $table->string('slug');
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_uuid')->references('uuid')->on('users');
         });

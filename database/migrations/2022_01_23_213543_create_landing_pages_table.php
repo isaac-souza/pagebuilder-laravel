@@ -25,6 +25,7 @@ class CreateLandingPagesTable extends Migration
             $table->json('draft')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('account_uuid')->references('uuid')->on('accounts');
         });
