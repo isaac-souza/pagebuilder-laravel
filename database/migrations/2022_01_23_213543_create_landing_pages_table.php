@@ -18,8 +18,8 @@ class CreateLandingPagesTable extends Migration
             $table->uuid('account_uuid')->index();
 
             $table->string('name');
-            $table->string('slug');
-            $table->string('type');
+            $table->string('slug')->index()->unique();
+            $table->string('type'); //sale, lead_magnet
 
             $table->json('pages')->nullable();
             $table->json('draft')->nullable();
