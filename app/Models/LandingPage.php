@@ -19,6 +19,9 @@ class LandingPage extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
+        'name',
+        'slug',
+        'type',
         'pages',
         'draft',
     ];
