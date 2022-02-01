@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\Account;
-use App\Models\LandingPage;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Tests\TestCase;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
+use App\Models\LandingPage;
+use App\Models\Account;
 
 class LandingPageTest extends TestCase
 {
@@ -115,7 +115,7 @@ class LandingPageTest extends TestCase
         // Arrange
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
-        $account = Account::factory()->for(($user))->create();
+        Account::factory()->for(($user))->create();
 
         $otherUserLandingPage = LandingPage::factory()->create();
         
@@ -141,5 +141,85 @@ class LandingPageTest extends TestCase
             'uuid' => $otherUserLandingPage->uuid,
             'deleted_at' => null,
         ]);
+    }
+
+    public function test_a_user_can_create_a_landing_page()
+    {
+        // Arrange
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+        Account::factory()->for(($user))->create();
+
+        // Pre assert
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('accounts', 1);
+        $this->assertDatabaseCount('landing_pages', 0);
+        
+        // Act
+        $this->actingAs($user);
+        $response = $this->postJson(route('landing-pages.store'), [
+            'name' => 'New landing pages name',
+        ]);
+        
+        // Assert
+        $response->assertStatus(201);
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('accounts', 1);
+        $this->assertDatabaseCount('landing_pages', 1);
+        $this->assertDatabaseHas('landing_pages', [
+            'name' => 'New landing pages name',
+            'deleted_at' => null,
+        ]);
+    }
+
+    public function test_the_name_is_required()
+    {
+        // Arrange
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+        Account::factory()->for(($user))->create();
+
+        // Pre assert
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('accounts', 1);
+        $this->assertDatabaseCount('landing_pages', 0);
+        
+        // Act
+        $this->actingAs($user);
+        $response = $this->postJson(route('landing-pages.store'), [
+            'name' => null,
+        ]);
+
+        // Assert
+        $response->assertStatus(422);
+        $response->assertJsonFragment([
+            0 => 'The name field is required.',
+            0 => 'The slug field is required.',
+        ]);
+        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('accounts', 1);
+        $this->assertDatabaseCount('landing_pages', 0);
+    }
+
+    public function test_only_authenticated_users_can_create_landing_pages()
+    {
+        // Arrange
+
+        // Pre assert
+        $this->assertDatabaseCount('users', 0);
+        $this->assertDatabaseCount('accounts', 0);
+        $this->assertDatabaseCount('landing_pages', 0);
+        
+        // Act
+        Auth::logout();
+        $response = $this->postJson(route('landing-pages.store'), [
+            'name' => 'It doesn\'t matter',
+        ]);
+
+        // Assert
+        $response->assertStatus(401);
+        $this->assertDatabaseCount('users', 0);
+        $this->assertDatabaseCount('accounts', 0);
+        $this->assertDatabaseCount('landing_pages', 0);
     }
 }
