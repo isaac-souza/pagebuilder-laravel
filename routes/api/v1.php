@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LandingPageDraftController;
 
-Route::middleware(['delay', 'auth:sanctum'])->group(function() {
+Route::middleware(['simulate.network.delay', 'auth:sanctum'])->group(function() {
 
     Route::get('/auth/check', [AuthController::class, 'check']);
     Route::get('/auth/account', [AuthController::class, 'account']);

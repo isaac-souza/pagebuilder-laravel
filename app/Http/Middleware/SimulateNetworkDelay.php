@@ -2,15 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class Delay
+class SimulateNetworkDelay
 {
     /**
-     * Handle an incoming request.
+     * Simulate network delay
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
@@ -21,7 +19,7 @@ class Delay
     {
         if(config('app.env') != 'production')
         {
-            sleep(0.5);
+            sleep(1);
         }
 
         return $next($request);
