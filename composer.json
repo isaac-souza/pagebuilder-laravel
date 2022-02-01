@@ -12,6 +12,7 @@
         "laravel/fortify": "^1.9",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/telescope": "^4.7",
         "laravel/tinker": "^2.5",
         "nunomaduro/larastan": "^1.0"
     },
