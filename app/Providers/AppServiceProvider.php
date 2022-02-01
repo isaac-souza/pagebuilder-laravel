@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Repositories\LandingPage\LandingPageRepositoryInterface;
+use App\Models\Repositories\LandingPage\LandingPageRepository;
+use App\Models\Repositories\LandingPage\Decorators\LandingPageRepositoryCacheDecorator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(LandingPageRepositoryInterface::class, function() {
+            return new LandingPageRepositoryCacheDecorator(new LandingPageRepository);
+        });
     }
 
     /**

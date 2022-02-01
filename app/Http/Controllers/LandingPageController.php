@@ -6,12 +6,19 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\LandingPage;
 use App\Http\Resources\LandingPageResource;
+use App\Http\Requests\LandingPageRequest;
+use App\Models\Repositories\LandingPage\LandingPageRepositoryInterface;
 
 class LandingPageController extends Controller
 {
+    public function __construct(private LandingPageRepositoryInterface $landingPageRepository)
+    {
+        // 
+    }
+
     public function index()
     {
-        return LandingPageResource::collection(account()->landingPages);
+        return LandingPageResource::collection($this->landingPageRepository->all());
     }
 
     public function store(LandingPageRequest $request)
