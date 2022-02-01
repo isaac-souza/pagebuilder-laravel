@@ -14,9 +14,24 @@ class LandingPageController extends Controller
         return LandingPageResource::collection(account()->landingPages);
     }
 
-    public function store(Request $request)
+    public function store(LandingPageRequest $request)
     {
-        //
+        $landingPage = account()->landingPages()->create(array_merge(
+            $request->validated(),
+            [
+                'type' => 'sales',
+                'pages' => [
+                    'main' => [],
+                    'thanks' => [],
+                ],
+                'draft' => [
+                    'main' => [],
+                    'thanks' => [],
+                ],
+            ]
+        ));
+
+        return new LandingPageResource($landingPage);
     }
 
     public function show($uuid)
