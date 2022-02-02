@@ -68,8 +68,6 @@ class LandingPageController extends Controller
     {
         $landingPage = LandingPage::find($uuid);
 
-        abort(404);
-
         if(is_null($landingPage))
         {
             return response()->json([], Response::HTTP_NOT_FOUND);
