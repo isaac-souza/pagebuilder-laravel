@@ -19,7 +19,7 @@ class SimulateNetworkDelay
     {
         if(config('app.env') != 'production')
         {
-            sleep(1);
+            // sleep(1);
         }
 
         return $next($request);
