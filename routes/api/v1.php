@@ -8,7 +8,7 @@ use App\Http\Controllers\AuthController;
 
 Route::prefix('public')->group(function() {
 
-    Route::get('landing-pages/{slug}', [PublicLandingPageController::class, 'show']);
+    Route::get('landing-pages/{slug}', [PublicLandingPageController::class, 'show'])->name('public.landing-pages.show');
 
 });
 
