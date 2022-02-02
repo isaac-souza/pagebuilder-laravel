@@ -12,7 +12,7 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-        return LandingPageResource::collection(account()->landingPages);
+        return LandingPageResource::collection(account()->landingPages()->latest()->get());
     }
 
     public function store(LandingPageRequest $request)
@@ -67,6 +67,8 @@ class LandingPageController extends Controller
     public function destroy($uuid)
     {
         $landingPage = LandingPage::find($uuid);
+
+        abort(404);
 
         if(is_null($landingPage))
         {
