@@ -222,4 +222,24 @@ class LandingPageTest extends TestCase
         $this->assertDatabaseCount('accounts', 0);
         $this->assertDatabaseCount('landing_pages', 0);
     }
+
+    public function test_guest_users_can_view_a_published_landingpage()
+    {
+        // Arrange
+        $landingPage = LandingPage::factory()->create([
+            'name' => 'Test Landing Page',
+            'slug' => 'test-landing-page',
+        ]);
+
+        // Pre assert
+        $this->assertDatabaseCount('landing_pages', 1);
+        
+        // Act
+        Auth::logout();
+        $response = $this->getJson(route('public.landing-pages.show', $landingPage->slug));
+
+        // Assert
+        $response->assertStatus(200);
+    }
+
 }
