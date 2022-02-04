@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicLandingPageController;
 use App\Http\Controllers\LandingPageDraftController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\AuthController;
 
 Route::prefix('public')->group(function() {
@@ -24,5 +25,13 @@ Route::middleware(['simulate.network.delay', 'auth:sanctum'])->group(function() 
     Route::post('landing-pages',            [LandingPageController::class, 'store'])->name('landing-pages.store');
     Route::put('landing-pages/{uuid}',      [LandingPageController::class, 'update'])->name('landing-pages.update');
     Route::delete('landing-pages/{uuid}',   [LandingPageController::class, 'destroy'])->name('landing-pages.destroy');
+
+    Route::prefix('image-gallery')->group(function() {
+
+        Route::get('',                          [ImageController::class, 'index'])->name('images.index');
+        Route::post('',                         [ImageController::class, 'store'])->name('images.store');
+        Route::delete('{uuid}',                 [ImageController::class, 'destroy'])->name('images.delete');
+
+    });
 
 });

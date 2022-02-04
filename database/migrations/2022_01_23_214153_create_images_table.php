@@ -22,7 +22,6 @@ class CreateImagesTable extends Migration
             $table->string('thumb_path');
 
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('account_uuid')->references('uuid')->on('accounts');
         });
