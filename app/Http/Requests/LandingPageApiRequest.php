@@ -7,7 +7,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-class LandingPageRequest extends FormRequest
+class LandingPageApiRequest extends FormRequest
 {
     public function failedValidation(Validator $validator)
     {
