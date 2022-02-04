@@ -6,16 +6,16 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\LandingPage;
 use App\Http\Resources\LandingPageResource;
-use App\Http\Requests\LandingPageRequest;
+use App\Http\Requests\LandingPageApiRequest;
 
 class LandingPageController extends Controller
 {
     public function index()
     {
-        return LandingPageResource::collection(account()->landingPages()->latest()->get());
+        return LandingPageResource::collection(account()->landingPages);
     }
 
-    public function store(LandingPageRequest $request)
+    public function store(LandingPageApiRequest $request)
     {
         $landingPage = account()->landingPages()->create(array_merge(
             $request->validated(),
