@@ -36,7 +36,7 @@ class LandingPageTest extends TestCase
         $response = $this->delete(route('landing-pages.destroy', $landingPage->uuid));
         
         // Assert
-        $response->assertStatus(200);
+        $response->assertStatus(204);
         $this->assertEquals(0, LandingPage::count());
         $this->assertDatabaseCount('users', 1);
         $this->assertDatabaseCount('accounts', 1);
