@@ -42,7 +42,7 @@ class ImageController extends Controller
 
             /** @var \Intervention\Image\Image $thumb */
             $thumb = InterventionImage::make($request->file)
-                ->resize(200, 200, function (Constraint $constraint) {
+                ->resize(150, 150, function (Constraint $constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
