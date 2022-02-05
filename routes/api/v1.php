@@ -26,7 +26,7 @@ Route::middleware(['simulate.network.delay', 'auth:sanctum'])->group(function() 
     Route::put('landing-pages/{uuid}',      [LandingPageController::class, 'update'])->name('landing-pages.update');
     Route::delete('landing-pages/{uuid}',   [LandingPageController::class, 'destroy'])->name('landing-pages.destroy');
 
-    Route::prefix('image-gallery')->group(function() {
+    Route::prefix('images')->group(function() {
 
         Route::get('',                          [ImageController::class, 'index'])->name('images.index');
         Route::post('',                         [ImageController::class, 'store'])->name('images.store');
