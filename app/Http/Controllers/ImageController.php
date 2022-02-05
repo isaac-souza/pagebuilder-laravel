@@ -41,14 +41,14 @@ class ImageController extends Controller
             Storage::disk('public')->putFileAs($folder, $request->file, "{$uuid}.{$extension}");
 
             /** @var \Intervention\Image\Image $thumb */
-            $thumb = InterventionImage::make(storage_path("app/public/{$image->path}"));
+            $thumb = InterventionImage::make($request->file)
+                ->resize(200, 200, function (Constraint $constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->encode($extension, 90);
 
-            $thumb->resize(200, 200, function (Constraint $constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
-            $thumb->save(storage_path("app/public/{$image->thumb_path}"));
+            Storage::disk('public')->put($folder . "/thumb-{$uuid}.{$extension}", $thumb);
 
             DB::commit();
 
