@@ -1,66 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# EZ Landing Page Builder
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## The app
 
-## About Laravel
+Simple web app to easily create landing pages by dragging and dropping prebuilt blocks.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Each block makes available a set of options to easily customize its content.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Users don't need to write a single line of code.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## The stack
 
-## Learning Laravel
+### Frontend
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. [Vue.js 3](https://v3.vuejs.org/) + Javascript
+2. [Vite.js](https://vitejs.dev/)
+3. [Tailwind CSS](https://tailwindcss.com/) + [Daisy UI](https://daisyui.com/)
+5. [Sortable.js](https://github.com/SortableJS/vue.draggable.next)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Backend
 
-## Laravel Sponsors
+1. [Laravel 8](https://laravel.com/docs/8.x)
+2. [Laravel Sail](https://laravel.com/docs/8.x/sail)
+3. [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum)
+4. [Laravel Fortify](https://laravel.com/docs/8.x/fortify)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Setting up the frontend
 
-### Premium Partners
+1. Clone the repo and navigate to the directory
+```
+git clone git@github.com:isaac-souza/pagebuilder-vue3.git
+cd pagebuilder-vue3
+```
+2. Install the dependencies
+```
+npm install
+```
+3. Copy the sample .env file
+```
+cp .env.example .env
+```
+4. Start the dev server
+```
+npm run dev
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+## Setting up the backend
 
-## Contributing
+1. Clone the repo and navigate to the directory
+```
+git clone git@github.com:isaac-souza/pagebuilder-laravel.git
+cd pagebuilder-laravel
+```
+2. Copy the sample .env file
+```
+cp .env.example .env
+```
+3. Install the dependencies (requires at least PHP 8.0)
+```
+composer install
+```
+4. Start Laravel Sail (needs Docker installed in your system)
+```
+vendor/bin/sail up
+```
+5. Generate key, run the migrations and link the storage folder
+```
+vendor/bin/sail artisan key:generate
+vendor/bin/sail artisan migrate
+vendor/bin/sail artisan storage:link
+```
+6. Run the tests
+```
+vendor/bin/sail artisan test
+```
+7. The backend should be available at
+```
+http://localhost
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## My development environment
 
-## Code of Conduct
+OS:
+```
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.6 LTS
+Release:	18.04
+Codename:	bionic
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Docker: 
+```
+Docker version 20.10.12, build e91ed57
+```
 
-## Security Vulnerabilities
+Docker-compose:
+```
+docker-compose version 1.29.2, build 5becea4c
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+PHP:
+```
+PHP 8.0.15 (cli) (built: Jan 29 2022 07:24:35) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v4.0.15, Copyright (c) Zend Technologies
+    with Zend OPcache v8.0.15, Copyright (c), by Zend Technologies
+```
+Composer
+```
+Composer version 2.1.6 2021-08-19 17:11:08
+```
+Node
+```
+v14.19.0
+```
+NPM
+```
+6.14.16
+```
