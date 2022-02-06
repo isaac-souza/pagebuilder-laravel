@@ -27,7 +27,7 @@ class ImageTest extends TestCase
         
         // Act
         $file = UploadedFile::fake()->image('ebook-cover.jpg', 400, 400);
-        $response = $this->postJson('/api/v1/images', [
+        $response = $this->postJson(route('images.store'), [
             'file' => $file,
         ]);
         
